@@ -29,30 +29,59 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void ToanTu(){
+        fThamso1 = Float.parseFloat(etGiatri.getText().toString());
+        sXuatkq = "0";
+        etGiatri.setText("0");
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnAdd:
                 sToantu = "+";
-                fThamso1 = Float.parseFloat(etGiatri.getText().toString());
-                sXuatkq = "0";
-                etGiatri.setText("0");
-                Log.d("ketqua","" + fThamso1);
+                ToanTu();
                 break;
             case R.id.btnDev:
                 sToantu = "/";
+                ToanTu();
                 break;
             case R.id.btnMul:
                 sToantu = "*";
+                ToanTu();
                 break;
             case R.id.btnSub:
                 sToantu = "-";
+                ToanTu();
                 break;
             case R.id.btnResult:
-                sToantu = "=";
+                Float ketqua = null;
                 fThamso2 = Float.parseFloat(etGiatri.getText().toString());
+                if (sToantu == "+") {
+                    ketqua = fThamso1 + fThamso2;
+                }
+
+                if (sToantu == "-") {
+                    ketqua = fThamso1 - fThamso2;
+                }
+
+                if (sToantu == "*") {
+                    ketqua = fThamso1 * fThamso2;
+                }
+
+                if (sToantu == "/") {
+                    ketqua = fThamso1 / fThamso2;
+                }
+
+                etGiatri.setText(String.valueOf(ketqua));
+                fThamso1 = 0.0f;
+                fThamso2 = 0.0f;
+                sXuatkq = "0";
                 break;
             default:
+            if (sXuatkq.equals("0")) {
+                sXuatkq = "";
+            }
             sXuatkq += ((Button)v).getText().toString();
             etGiatri.setText(sXuatkq);
         }
